@@ -42,3 +42,11 @@ def test_collection_request(client):
     current_ids = list(map(lambda x : x['city_id'] , cr.city_weather_info))
     expected_ids = load_city_ids() 
     assert sorted(current_ids) == sorted(expected_ids)
+
+@pytest.mark.django_db(transaction=True)
+def test_get_collection_request(client):
+    cr = CollectionRequest(id=1)
+    cr.save()
+
+    response = client.get('/collection-request/1')
+    assert response.status_code == status.HTTP_200_OK

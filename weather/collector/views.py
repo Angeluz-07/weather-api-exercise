@@ -83,6 +83,13 @@ async def gather_weather_info(collection_request_id):
         await asyncio.gather(*tasks)
         await session.close()
 
+
+@api_view(['GET'])
+def get_collection_request(request, pk):
+    cr = get_object_or_404(CollectionRequest.objects, id=pk)
+    serializer = CollectionRequestSerializer(cr)
+    return Response(serializer.data)
+
 @api_view(['GET','POST','DELETE'])
 def collection_request(request):
     if request.method == 'GET':
