@@ -158,4 +158,4 @@ STATIC_URL = '/static/'
 check_env_variables(['OPEN_WEATHER_API_KEY'])
 OPEN_WEATHER_API_KEY = os.environ.get('OPEN_WEATHER_API_KEY')
 
-CITY_IDS_FP = BASE_DIR / 'data' / 'city_ids.json'
+CITY_IDS_FP = BASE_DIR / 'custom_data' / 'city_ids.json'
