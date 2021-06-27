@@ -20,7 +20,7 @@ Start running the service
 sudo docker-compose up
 ```
 
-Use a http client and make http request to the following services
+Use a http client and make http requests to the following services
 
 ### Collect data
 POST `http://localhost:8000/collection-request/` 
@@ -71,3 +71,12 @@ example response :
     ]
 }
 ```
+
+### Stack
+For this exercise Django + Django REST Framework was selected as the tool to develop the service. It was selected to set up a quick and robust api, abstracting the DB interacion/migrations/data validations logic needed.
+
+For async calls `asyncio` module of python was used. The calls were scheduled to respect the limits of 60 calls per minute in the open-weather api. Also the module `aiohttp` to be consistent with async functions implemented and the type of http requests needed.
+
+PostgresSQL was selected to handle the data storage of json data by keeping a relational model as the main data model. The integration of services was set up with docker-compose for quick development.
+
+The development was Test-driven using pytest-django and pytest-asyncio to fully test the async functions developed. There was a challenge given that Django ORM doesnt work smoothly with async functions. So, it was needed to use Django cache to keep track of the progress of the data collected. For a more scalable solution it would be needed to use another service(maybe redis), but for this exercise django cache worked fine.
